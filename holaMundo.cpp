@@ -36,9 +36,20 @@ void CalcularDatos(int arreglo[], int tamano, float *promedio , int *maximo , in
 
     *promedio /= tamano;
 }
-int BuscarIndice(int arreglo[],int tamano2)
+int BuscarIndice(int arreglo[],int tamano2,int numero)
+{
+    for(int i=0;i<tamano2;i++)
+    {
+        if(arreglo[i]==numero)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 
 int esPrimo(int numero);
+//Funcion principal
 int main ()
 {
     //variables par o impar
@@ -56,13 +67,15 @@ int main ()
     int numeros2[] = {5, 10, 15, 20, 25};
     int tamano2 = sizeof(numeros2) /sizeof(numeros2[0]);
 
-
+    //<----------------------------Ejercicio 1------------------>
     printf("ingresa un numero\n");
     scanf("%d",&num);
     ParImpar(num);
     printf("ingresa un numero\n");
     scanf("%d",&num2);
     ParImpar(num2);
+    //<-------------------------Fin Ejercicio 1---------------------->
+    //<--------------Ejercicio 2--------------->
     printf("\n\nIngresa un numero\n");
     scanf("%d",&primo);
 
@@ -72,19 +85,41 @@ int main ()
     }else{
         printf("El numero no es primo\n");
     }
+    //<-------------------------Fin Ejercicio 2---------------------->
     //<-------------------Ejecicio 3----------------->
     CalcularDatos(numeros, tamano, &promedio, &maximo, &minimo);
 
     printf("Promedio: %.2f\n", promedio);
     printf("Valor maximo: %d\n", maximo);
     printf("Valor minimo: %d\n", minimo);
+    //<-------------------------Fin Ejercicio 3---------------------->
 
     //<------------------Ejercicio 4-------------->
-    printf("Ingrese un numero");
+    int numeroBuscado1 = 20;
+    int numeroBuscado2 = 8;
+
+    int indice1 = BuscarIndice(numeros2, tamano2, numeroBuscado1);
+    int indice2 = BuscarIndice(numeros2, tamano2, numeroBuscado2);
+
+    if (indice1 != -1) {
+        printf("El numero %d se encuentra en el indice %d\n", numeroBuscado1, indice1);
+    } else {
+        printf("El numero %d no se encontro en el arreglo\n", numeroBuscado1);
+    }
+
+    if (indice2 != -1) {
+        printf("El numero %d se encuentra en el indice %d\n", numeroBuscado2, indice2);
+    } else {
+        printf("El numero %d no se encontro en el arreglo\n", numeroBuscado2);
+    }
+    //<-------------------------Fin Ejercicio 4---------------------->
+
+    //<-------------------Ejercicio 5-------------------------------->
     
     return 0;
 }
-    int esPrimo (int primo)
+//Funcion para saber si es primo 
+int esPrimo (int primo)
     {
         if(primo ==0 || primo ==1)return 0;
         if(primo ==4)return 0;
@@ -93,4 +128,4 @@ int main ()
             if (primo % x == 0) return 0;
         }
         return 1;       
-    }
+    }    
