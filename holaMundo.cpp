@@ -47,7 +47,28 @@ int BuscarIndice(int arreglo[],int tamano2,int numero)
     }
     return -1;
 }
+int eliminarDuplicados(int arreglo3[], int tamano3) {
+    if (tamano3 <= 1) {
+        return tamano3;  // No hay duplicados para eliminar en arreglos de tamaño 0 o 1
+    }
 
+    int nuevoTamano = tamano3;
+
+    for (int i = 0; i < nuevoTamano; i++) {
+        for (int j = i + 1; j < nuevoTamano; j++) {
+            if (arreglo3[i] == arreglo3[j]) {
+                // Se encontró un duplicado, eliminarlo reorganizando el arreglo
+                for (int k = j; k < nuevoTamano - 1; k++) {
+                    arreglo3[k] = arreglo3[k + 1];
+                }
+                nuevoTamano--;  // Reducir el tamaño del arreglo
+                j--;  // Revisar el mismo índice nuevamente en caso de múltiples duplicados
+            }
+        }
+    }
+
+    return nuevoTamano;
+}
 int esPrimo(int numero);
 //Funcion principal
 int main ()
@@ -115,7 +136,21 @@ int main ()
     //<-------------------------Fin Ejercicio 4---------------------->
 
     //<-------------------Ejercicio 5-------------------------------->
-    
+    int numeros3[] = {10, 5, 20, 15, 10, 25, 15, 5};
+    int tamano3 = sizeof(numeros) / sizeof(numeros[0]);
+    printf("Arreglo original:\n");
+    for (int i = 0; i < tamano3; i++) {
+        printf("%d ", numeros3[i]);
+    }
+    printf("\n");
+
+    int nuevoTamano = eliminarDuplicados(numeros3, tamano3);
+
+    printf("Arreglo sin duplicados:\n");
+    for (int i = 0; i < nuevoTamano; i++) {
+        printf("%d ", numeros3[i]);
+    }
+    printf("\n");
     return 0;
 }
 //Funcion para saber si es primo 
